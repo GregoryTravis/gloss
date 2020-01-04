@@ -51,7 +51,7 @@ instance Backend GLUTState where
         initializeBackend          = initializeGLUT
 
         -- non-freeglut doesn't like this: (\_ -> GLUT.leaveMainLoop)
-        exitBackend                = (\_ -> System.exitWith System.ExitSuccess)
+        exitBackend                = (\_ -> GLUT.leaveMainLoop)
 
         openWindow                 = openWindowGLUT
         dumpBackendState           = dumpStateGLUT
@@ -59,7 +59,7 @@ instance Backend GLUTState where
 
         -- We can ask for this in freeglut, but it doesn't seem to work :(.
         -- (\_ -> GLUT.actionOnWindowClose $= GLUT.MainLoopReturns)
-        installWindowCloseCallback = (\_ -> return ())
+        installWindowCloseCallback = (_ -> GLUT.actionOnWindowClose $= GLUT.MainLoopReturns)"
 
         installReshapeCallback     = installReshapeCallbackGLUT
         installKeyMouseCallback    = installKeyMouseCallbackGLUT
