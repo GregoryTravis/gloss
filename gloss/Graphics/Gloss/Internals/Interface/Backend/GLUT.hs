@@ -59,7 +59,7 @@ instance Backend GLUTState where
 
         -- We can ask for this in freeglut, but it doesn't seem to work :(.
         -- (\_ -> GLUT.actionOnWindowClose $= GLUT.MainLoopReturns)
-        installWindowCloseCallback = (\_ -> GLUT.actionOnWindowClose $= GLUT.MainLoopReturns)
+        installWindowCloseCallback = (\_ -> return ())
 
         installReshapeCallback     = installReshapeCallbackGLUT
         installKeyMouseCallback    = installKeyMouseCallbackGLUT
